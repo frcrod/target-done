@@ -47,6 +47,7 @@ export default function Todo({
           onChange={(event) => checkBoxOnChange(event, id)}
           style={{ flexGrow: 0 }}
         />
+        {/* TODO Improve UI for Updating and Alert after successful  */}
         <Form
           name={`updateTodoContent-${id}`}
           style={{

@@ -1,23 +1,18 @@
-import { useState, createContext, useEffect } from "react";
+import { useState, createContext } from "react";
 import { type ReactNode } from "react";
-import { type Todo } from "../Utils/types";
+import { type Todo, type TodoContext as TodoContextType } from "../Utils/types";
+import useLocalStorage from "../Hooks/useLocalStorage";
 
 type TodoProviderProps = {
   children: ReactNode;
 };
 
-export type TodoContext = {
-  todos: Todo[];
-  removeTodo: (id: string) => void;
-  addTodo: (content: string) => void;
-  updateTodoStatus: (id: string, status: boolean) => void;
-  updateTodoContent: (id: string, content: string) => void;
-};
-
-export const TodoContext = createContext<TodoContext | undefined>(undefined);
+export const TodoContext = createContext<TodoContextType | undefined>(
+  undefined
+);
 
 export default function TodoProvider({ children }: TodoProviderProps) {
-  const [todos, setTodos] = useState<Todo[]>([
+  const [todos, setTodos] = useLocalStorage<Todo[]>("todos", [
     {
       id: "asf13",
       content:
@@ -29,7 +24,7 @@ export default function TodoProvider({ children }: TodoProviderProps) {
   ]);
 
   const removeTodo = (id: string) => {
-    setTodos([...todos.filter((value) => value.id !== id)]);
+    setTodos([...todos.filter((value: Todo) => value.id !== id)]);
   };
 
   const addTodo = (content: string) => {
@@ -39,7 +34,7 @@ export default function TodoProvider({ children }: TodoProviderProps) {
   };
 
   const updateTodoContent = (id: string, content: string) => {
-    const update = todos.map((value) => {
+    const update = todos.map((value: Todo) => {
       if (value.id === id) {
         return { ...value, content };
       }
@@ -52,7 +47,7 @@ export default function TodoProvider({ children }: TodoProviderProps) {
   };
 
   const updateTodoStatus = (id: string, status: boolean) => {
-    const update = todos.map((value) => {
+    const update = todos.map((value: Todo) => {
       if (value.id === id) {
         return { ...value, isDone: status };
       }
