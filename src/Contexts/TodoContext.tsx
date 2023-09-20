@@ -1,4 +1,4 @@
-import { useState, createContext } from "react";
+import { createContext } from "react";
 import { type ReactNode } from "react";
 import { type Todo, type TodoContext as TodoContextType } from "../Utils/types";
 import useLocalStorage from "../Hooks/useLocalStorage";
