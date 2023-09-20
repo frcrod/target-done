@@ -20,7 +20,7 @@ export default function TodoProvider({ children }: TodoProviderProps) {
       isDone: false,
     },
     { id: "asdfadf1a", content: "Hello World!", isDone: true },
-    { id: "asfasdf11", content: "Hello World!!", isDone: false },
+    { id: "asfasdf11", content: "World!!", isDone: false },
   ]);
 
   const removeTodo = (id: string) => {
